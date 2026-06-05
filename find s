@@ -1,0 +1,37 @@
+# FIND-S Algorithm Implementation
+
+def find_s(training_data, target):
+    # Initialize hypothesis with most specific values
+    hypothesis = ['Ø'] * len(training_data[0])
+
+    print("Initial Hypothesis:", hypothesis)
+
+    for i in range(len(training_data)):
+        if target[i] == "Yes":  # Consider only positive examples
+            print("\nConsidering Positive Example:", training_data[i])
+
+            for j in range(len(hypothesis)):
+                if hypothesis[j] == 'Ø':
+                    hypothesis[j] = training_data[i][j]
+                elif hypothesis[j] != training_data[i][j]:
+                    hypothesis[j] = '?'
+
+            print("Updated Hypothesis:", hypothesis)
+
+    return hypothesis
+
+
+# Training Data (Example: EnjoySport Problem)
+training_data = [
+    ["Sunny", "Warm", "Normal", "Strong", "Warm", "Same"],
+    ["Sunny", "Warm", "High", "Strong", "Warm", "Same"],
+    ["Rainy", "Cold", "High", "Strong", "Warm", "Change"],
+    ["Sunny", "Warm", "High", "Strong", "Cool", "Change"]
+]
+
+target = ["Yes", "Yes", "No", "Yes"]
+
+# Run FIND-S
+final_hypothesis = find_s(training_data, target)
+
+print("\nFinal Hypothesis:", final_hypothesis)
